@@ -1,0 +1,5 @@
+/generator/select gps
+/gps/particle e-
+/gps/energy 2.3 GeV
+/gps/direction 0 0 1
+/gps/position 5.0 30.0 0 mm

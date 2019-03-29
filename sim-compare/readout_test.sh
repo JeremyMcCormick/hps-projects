@@ -1,0 +1,1 @@
+java -Djava.util.logging.config.file=logging.properties -jar /home/jermc/.m2/repository/org/hps/hps-distribution/4.3-SNAPSHOT/hps-distribution-4.3-SNAPSHOT-bin.jar -r -islicFilteredEvents.slcio -DoutputFile=slicReadoutEvents /org/hps/steering/readout/PhysicsRun2016TrigSingles0.lcsim
