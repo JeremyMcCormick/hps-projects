@@ -2,14 +2,20 @@
 
 rm *.slcio
 
+log=job.log
 luigi --module hps.batch.jobs.slic_recon SlicReadoutTask \
---SlicTask-nevents 100 \
+--SlicTask-detector HPS-HodoscopeTest-v1 \
+--SlicTask-nevents 1000 \
 --SlicTask-stdhep-files '["tritrigv2_MG5_ESum2GeV_15.stdhep"]' \
 --SlicFilterTask-output-file slicFilteredEvents.slcio \
---SlicReadoutTask-steering /org/hps/steering/readout/SimpleHodoscopeTrigger.lcsim \
---SlicReadoutTask-nevents 25000 \
---SlicReadoutTask-detector HPS-PhysicsRun2019-v1-4pt5 \
+--SlicFilterTask-nevents 250000 \
+--SlicReadoutTask-steering /org/hps/steering/readout/SimpleHodoscopeTriggerNoTracker.lcsim \
+--SlicReadoutTask-detector HPS-HodoscopeTest-v1 \
 --SlicReadoutTask-run-number 1000000 \
 --SlicReadoutTask-output-file slicReadoutEvents.slcio \
---local-scheduler
+--local-scheduler \
+&> job.log &
 
+echo "Writing output to: $log"
+
+#--SlicReadoutTask-nevents 250000 \
