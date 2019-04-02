@@ -1,0 +1,6 @@
+*.slcio
+*.stdhep
+*.aida
+*.log
+*.lcdd
+fieldmap
