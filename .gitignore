@@ -4,4 +4,6 @@
 *.log
 *.lcdd
 *.jar
+*.root
+tuple_*.txt
 fieldmap
