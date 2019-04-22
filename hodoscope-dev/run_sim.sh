@@ -7,6 +7,7 @@ luigi --module hps.batch.jobs.slic_recon SlicTask \
 --SlicTask-detector HPS-HodoscopeTest-v1 \
 --SlicTask-nevents 10000 \
 --SlicTask-stdhep-files '["tritrigv2_MG5_ESum2GeV_15.stdhep"]' \
+--SlicTask-output-file slicHodoTestEvents.slcio \
 --local-scheduler \
 &> job.log &
 
