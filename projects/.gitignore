@@ -1,0 +1,9 @@
+*.slcio
+*.aida
+*.log
+*.lcdd
+*.jar
+*.root
+tuple_*.txt
+fieldmap
+*Task*.sh
