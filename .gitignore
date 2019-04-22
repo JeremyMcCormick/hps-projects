@@ -7,3 +7,4 @@
 *.root
 tuple_*.txt
 fieldmap
+*Task*.sh
