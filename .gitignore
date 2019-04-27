@@ -7,3 +7,5 @@
 tuple_*.txt
 fieldmap
 *Task*.sh
+*.pem
+*.done
