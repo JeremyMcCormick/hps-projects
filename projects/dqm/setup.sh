@@ -1,1 +1,1 @@
-../../setup-scripts/local-setup.sh
+../../setup-scripts/jlab-setup.sh

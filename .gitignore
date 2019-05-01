@@ -9,3 +9,5 @@ fieldmap
 *Task*.sh
 *.pem
 *.done
+*.err
+*.out
