@@ -11,3 +11,6 @@ fieldmap
 *.done
 *.err
 *.out
+ETBuffer
+hps_conditions.db
+*.pdf
