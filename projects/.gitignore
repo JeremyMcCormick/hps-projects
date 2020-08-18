@@ -4,6 +4,7 @@
 *.lcdd
 *.jar
 *.root
+*.evio
 tuple_*.txt
 fieldmap
 *Task*.sh
