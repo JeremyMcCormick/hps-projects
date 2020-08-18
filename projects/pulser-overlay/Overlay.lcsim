@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lcsim xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="http://www.lcsim.org/schemas/lcsim/1.0/lcsim.xsd">
+    <inputFiles>
+        <file>pulser_1.slcio</file>
+    </inputFiles>
+    <execute>
+        <driver name="OverlayDriver" />
+        <driver name="OutputDriver" />
+    </execute>
+    <drivers>
+        <driver name="OverlayDriver" type="org.hps.digi.DataOverlayDriver">
+            <inputFile>./pulser_2.slcio</inputFile>
+        </driver>
+        <driver name="OutputDriver" type="org.lcsim.util.loop.LCIODriver">
+            <outputFilePath>./merged.slcio</outputFilePath>
+        </driver>
+    </drivers>
+</lcsim>
