@@ -5,6 +5,7 @@ from pyLCIO.drivers.EventMarkerDriver import EventMarkerDriver
 from pyLCIO.drivers.Driver import Driver
 from pyLCIO import UTIL
 from examples.exampleDrivers.McParticlePlotDriver import McParticlePlotDriver
+from ROOT import TFile
 
 class MyDriver(Driver):
 
@@ -15,6 +16,25 @@ class DumpEventDriver(Driver):
 
     def processEvent(self, event):
         UTIL.LCTOOLS.dumpEventDetailed(event)
+
+class RootOutputDriver(Driver):
+
+    def __init__(self, filename):
+        self.filename = filename
+        if self.filename is None:
+            raise Exception('The filename is None')
+        self.tfile = TFile(filename, 'CREATE')
+        super().__init__()
+
+    def endOfData(self):
+        self.tfile.Write()
+        self.tfile.Close()
+
+class MyMcParticlePlotDriver(McParticlePlotDriver):
+
+    def endOfData(self):
+        """Override the super method to disable interactive prompt."""
+        pass
 
 if __name__ == '__main__':
 
@@ -27,10 +47,10 @@ if __name__ == '__main__':
     loop = EventLoop()
     loop.addFiles(input_files)
     loop.add(EventMarkerDriver())
-    loop.add(MyDriver())
+    #loop.add(MyDriver())
     #loop.add(DumpEventDriver()) # dump out event info to console
-    loop.add(McParticlePlotDriver()) # TODO: override interactive prompt at end
-    # TODO: write ROOT file from Driver with plots
+    loop.add(MyMcParticlePlotDriver())
+    loop.add(RootOutputDriver('plots.root'))
 
     print('Running loop...')
     loop.loop()
