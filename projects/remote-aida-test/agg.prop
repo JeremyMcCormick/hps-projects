@@ -1,0 +1,4 @@
+port = 3001
+name = RmiAidaAgg
+interval = 5000
+remotes = //thinksgiving:2001/RmiAidaServer,//thinksgiving:2002/RmiAidaServer
