@@ -14,3 +14,5 @@ fieldmap
 ETBuffer
 hps_conditions.db
 *.pdf
+.project
+.pydevproject
