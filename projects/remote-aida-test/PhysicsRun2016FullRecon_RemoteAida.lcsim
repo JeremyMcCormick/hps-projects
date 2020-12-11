@@ -65,13 +65,20 @@
 
 <!--        <driver name="RemoteMonitoringDriver"/> -->
         <driver name="RemoteHistExampleDriver"/>
+<!--        <driver name="EcalMonitoring"/> -->
         <driver name="SleepDriver"/>
     </execute>    
     <drivers>    
         <!-- insert delay for testing purposes -->
         <driver name="SleepDriver" type="org.hps.online.recon.util.SleepDriver"/>
-   
-        <driver name="RemoteHistExampleDriver" type="org.hps.online.recon.remoteaida.RemoteHistExampleDriver">
+
+<!--
+        <driver name="EcalMonitoring" type="org.hps.online.recon.remoteaida.RemoteEcalClusPlotsDriver">
+            <port>${port}</port>
+        </driver>
+-->
+
+        <driver name="RemoteHistExampleDriver" type="org.hps.online.recon.remoteaida.HistExampleDriver">
             <port>${port}</port>
         </driver>
 

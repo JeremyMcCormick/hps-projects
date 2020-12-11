@@ -12,12 +12,15 @@ rm $outputname.slcio $outputname.log &> /dev/null
 
 echo "Running remote recon on port ${port} with output: $outputname"
 
-java -cp ./hps-distribution-bin.jar org.hps.evio.EvioToLcio \
+java -Djava.util.logging.config.file=./logging.properties \
+    -cp ./hps-distribution-bin.jar org.hps.evio.EvioToLcio \
     -d HPS-PhysicsRun2016-Pass2 \
     -f evio_files.txt \
     -DoutputFile=$outputname \
     -Dport=${port} \
-    -x PhysicsRun2016FullRecon_RemoteAida.lcsim &> $outputname.log
+    -x PhysicsRun2016FullRecon_RemoteAida.lcsim \
+    -e 1
+    #&> $outputname.log
 
 echo "Done!"
 #\
