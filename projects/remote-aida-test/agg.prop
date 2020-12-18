@@ -1,4 +1,5 @@
 port = 3001
-name = RmiAidaAgg
+name = HPSRecon
+host = localhost
 interval = 5000
-remotes = //thinksgiving:2001/RmiAidaServer,//thinksgiving:2002/RmiAidaServer
+remotes = //localhost:2001/ReconStation,//localhost:2002/ReconStation
