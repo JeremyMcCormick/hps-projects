@@ -70,7 +70,9 @@
     </execute>    
     <drivers>    
         <!-- insert delay for testing purposes -->
-        <driver name="SleepDriver" type="org.hps.online.recon.util.SleepDriver"/>
+        <driver name="SleepDriver" type="org.hps.online.recon.util.SleepDriver">
+            <millis>5000</millis>
+        </driver>
 
 <!--
         <driver name="EcalMonitoring" type="org.hps.online.recon.remoteaida.RemoteEcalClusPlotsDriver">
@@ -80,6 +82,7 @@
 
         <driver name="RemoteHistExampleDriver" type="org.hps.online.recon.remoteaida.HistExampleDriver">
             <port>${port}</port>
+            <hostName>${host}</hostName>
         </driver>
 
 <!--
