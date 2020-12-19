@@ -1,20 +1,19 @@
 #!/bin/sh
 
+##########################################
+# Shell environment for HPS online recon #
+##########################################
+
+# ET buffer file
 etfile=/tmp/ETBuffer
 
-# this should be a symlink to the actual distribution jar
+# Path to hps-java distribution jar (can be a symlink)
 jarfile=$PWD/hps-distribution-bin.jar
 
-client_cmd="java -Djava.util.logging.config.file=./client_logging.properties -cp $jarfile org.hps.online.recon.Client"
+# Scratch directory for server and stations
+scratchdir=$PWD/scratch
 
-agg_cmd="java -Djava.util.logging.config.file=./aggregator_looging.properties -cp $jarfile org.hps.online.recon.Aggregator"
-
-prod_cmd="java -Djava.util.logging.config.file=./evio_logging.properties -cp $jarfile org.hps.record.evio.EvioFileProducer -f $etfile -d 1000 -e 1"
-
-et_cmd="et_start -p 11111 -f $etfile -n 100 -s 200000 -v -d"
-
-server_cmd="java -Djava.util.logging.config.file=./server_logging.properties -Dorg.hps.conditions.url=jdbc:sqlite:${db} -cp $jarfile org.hps.online.recon.Server -w $PWD/scratch"
-
+# Local conditions db file
 if [ -z "$CONDITIONS_DB" ]
 then
   # my local db as default (change it)
@@ -22,6 +21,22 @@ then
 else
   db=$CONDITIONS_DB
 fi
+
+# Command to run the client
+client_cmd="java -Djava.util.logging.config.file=./client_logging.properties -cp $jarfile org.hps.online.recon.Client"
+
+# Command to run the plot aggregator
+agg_cmd="java -Djava.util.logging.config.file=./aggregator_looging.properties -cp $jarfile org.hps.online.recon.Aggregator"
+
+# Command to run the EVIO file producer
+prod_cmd="java -Djava.util.logging.config.file=./evio_logging.properties -cp $jarfile org.hps.record.evio.EvioFileProducer -f $etfile -d 1000 -e 1"
+
+# Command to run the ET ring
+et_cmd="et_start -p 11111 -f $etfile -n 100 -s 200000 -v -d"
+
+# Command to run the server
+server_cmd="java -Djava.util.logging.config.file=./server_logging.properties -Dorg.hps.conditions.url=jdbc:sqlite:${db} -cp $jarfile org.hps.online.recon.Server -w $PWD/scratch"
+
 
 error () {
     echo "ERROR: $1"
@@ -68,7 +83,7 @@ hps-recon-settings () {
 }
 
 hps-recon-status () {
-  $client_cmd status -v
+  $client_cmd status -v $@
 }
 
 hps-recon-stop () {
@@ -90,8 +105,12 @@ hps-recon-et-start () {
 }
 
 hps-recon-server-start () {
-  scratchdir=$PWD/scratch
   mkdir $scratchdir &> /dev/null
+  if [[ ! -d "$scratchdir" ]]
+  then
+    error "Failed to create scratch dir at: $scratchdir"
+    return 1
+  fi
   $server_cmd $@
 }
 
