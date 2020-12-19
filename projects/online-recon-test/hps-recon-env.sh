@@ -26,7 +26,7 @@ fi
 client_cmd="java -Djava.util.logging.config.file=./client_logging.properties -cp $jarfile org.hps.online.recon.Client"
 
 # Command to run the plot aggregator
-agg_cmd="java -Djava.util.logging.config.file=./aggregator_looging.properties -cp $jarfile org.hps.online.recon.Aggregator"
+agg_cmd="java -Djava.util.logging.config.file=./aggregator_logging.properties -cp $jarfile org.hps.online.recon.Aggregator"
 
 # Command to run the EVIO file producer
 prod_cmd="java -Djava.util.logging.config.file=./evio_logging.properties -cp $jarfile org.hps.record.evio.EvioFileProducer -f $etfile -d 1000 -e 1"
