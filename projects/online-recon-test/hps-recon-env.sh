@@ -2,15 +2,18 @@
 
 etfile=/tmp/ETBuffer
 
-client_cmd="java -Djava.util.logging.config.file=client_logging.properties -cp ./hps-distribution-bin.jar org.hps.online.recon.Client"
+# this should be a symlink to the actual distribution jar
+jarfile=$PWD/hps-distribution-bin.jar
 
-agg_cmd="java -Djava.util.logging.config.file=./logging.properties -cp ./hps-distribution-bin.jar org.hps.online.recon.Aggregator"
+client_cmd="java -Djava.util.logging.config.file=./client_logging.properties -cp $jarfile org.hps.online.recon.Client"
 
-prod_cmd="java -Djava.util.logging.config.file=evio_logging.properties -cp $PWD/hps-distribution-bin.jar org.hps.record.evio.EvioFileProducer -f $etfile -d 1000 -e 1"
+agg_cmd="java -Djava.util.logging.config.file=./aggregator_looging.properties -cp $jarfile org.hps.online.recon.Aggregator"
+
+prod_cmd="java -Djava.util.logging.config.file=./evio_logging.properties -cp $jarfile org.hps.record.evio.EvioFileProducer -f $etfile -d 1000 -e 1"
 
 et_cmd="et_start -p 11111 -f $etfile -n 100 -s 200000 -v -d"
 
-server_cmd="java -Djava.util.logging.config.file=$PWD/logging.properties -Dorg.hps.conditions.url=jdbc:sqlite:${db} -cp ./hps-distribution-bin.jar org.hps.online.recon.Server -w $PWD/scratch"
+server_cmd="java -Djava.util.logging.config.file=./server_logging.properties -Dorg.hps.conditions.url=jdbc:sqlite:${db} -cp $jarfile org.hps.online.recon.Server -w $PWD/scratch"
 
 if [ -z "$CONDITIONS_DB" ]
 then
