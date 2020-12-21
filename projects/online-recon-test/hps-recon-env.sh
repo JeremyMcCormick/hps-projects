@@ -7,8 +7,8 @@
 # ET buffer file
 etfile=/tmp/ETBuffer
 
-# Path to hps-java distribution jar (can be a symlink)
-jarfile=$PWD/hps-distribution-bin.jar
+# Path to hps-java distribution jar (read from a symlink)
+jarfile=$(readlink -f $PWD/hps-distribution-bin.jar)
 
 # Scratch directory for server and stations
 scratchdir=$PWD/scratch
@@ -25,18 +25,19 @@ fi
 # Command to run the client
 client_cmd="java -Djava.util.logging.config.file=./client_logging.properties -cp $jarfile org.hps.online.recon.Client"
 
-# Command to run the plot aggregator
+# Command to run the aggregator
 agg_cmd="java -Djava.util.logging.config.file=./aggregator_logging.properties -cp $jarfile org.hps.online.recon.Aggregator"
 
-# Command to run the EVIO file producer
-prod_cmd="java -Djava.util.logging.config.file=./evio_logging.properties -cp $jarfile org.hps.record.evio.EvioFileProducer -f $etfile -d 1000 -e 1"
+# Command to run the producer (delay and files must be provided)
+prod_cmd="time java -Djava.util.logging.config.file=./evio_logging.properties -cp $jarfile org.hps.record.evio.EvioFileProducer -f $etfile -e 100"
+#prod_cmd="java -Djava.util.logging.config.file=./evio_logging.properties -cp $jarfile org.hps.record.evio.EvioFileProducer -f $etfile -d 1000 -e 1"
 
 # Command to run the ET ring
-et_cmd="et_start -p 11111 -f $etfile -n 100 -s 200000 -v -d"
+et_cmd="et_start -nd -p 11111 -f $etfile -s 20000 -n 1000 -v -d"
 
 # Command to run the server
+# FIXME: hard-coded sqlite3 connection
 server_cmd="java -Djava.util.logging.config.file=./server_logging.properties -Dorg.hps.conditions.url=jdbc:sqlite:${db} -cp $jarfile org.hps.online.recon.Server -w $PWD/scratch"
-
 
 error () {
     echo "ERROR: $1"
@@ -111,6 +112,7 @@ hps-recon-server-start () {
     error "Failed to create scratch dir at: $scratchdir"
     return 1
   fi
+  echo $server_cmd $@
   $server_cmd $@
 }
 
