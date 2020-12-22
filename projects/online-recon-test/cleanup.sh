@@ -1,1 +1,1 @@
-rm -rf scratch/*
+rm -rf scratch bin repo
