@@ -13,15 +13,6 @@ jarfile=$(readlink -f $PWD/hps-distribution-bin.jar)
 # Scratch directory for server and stations
 scratchdir=$PWD/scratch
 
-# Local conditions db file
-if [ -z "$CONDITIONS_DB" ]
-then
-  # my local db as default (change it)
-  db=/work/slac/data/conditions/hps_conditions_2020_08_17.db
-else
-  db=$CONDITIONS_DB
-fi
-
 # Command to run the client
 client_cmd="java -Djava.util.logging.config.file=./client_logging.properties -cp $jarfile org.hps.online.recon.Client"
 
@@ -37,7 +28,7 @@ et_cmd="et_start -nd -p 11111 -f $etfile -s 20000 -n 1000 -v -d"
 
 # Command to run the server
 # FIXME: hard-coded sqlite3 connection
-server_cmd="java -Djava.util.logging.config.file=./server_logging.properties -Dorg.hps.conditions.url=jdbc:sqlite:${db} -cp $jarfile org.hps.online.recon.Server -w $PWD/scratch"
+server_cmd="java -Djava.util.logging.config.file=./server_logging.properties -cp $jarfile org.hps.online.recon.Server -w $PWD/scratch"
 
 error () {
     echo "ERROR: $1"

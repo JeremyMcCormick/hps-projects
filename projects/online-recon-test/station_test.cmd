@@ -8,8 +8,8 @@ prop-set lcsim.builder org.hps.evio.LCSimTestRunEventBuilder
 prop-set station.queue 1 
 prop-set station.stopOnErrors true
 prop-set station.stopOnEndRun true
-prop-set station.printInterval 10
-prop-set station.loggingConfig /work/slac/git/hps-projects/projects/online-recon-test/station_logging.properties
+prop-set station.printInterval 1
+prop-set station.loggingConfig ../../station_logging.properties
 prop-set et.buffer /tmp/ETBuffer
 prop-set et.host localhost
 prop-set et.port 11111
