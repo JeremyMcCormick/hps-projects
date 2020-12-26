@@ -1,5 +1,6 @@
 prop-set lcsim.detector HPS-PhysicsRun2016-Pass2
 prop-set lcsim.steering /org/hps/steering/recon/PhysicsRun2016FullRecon_RemoteAida.lcsim
+#prop-set lcsim.steering file:///work/slac/git/hps-projects/projects/online-recon-test/Dummy.lcsim
 prop-set lcsim.run 7799
 prop-set lcsim.conditions jdbc:sqlite:/work/slac/data/conditions/hps_conditions_2020_08_17.db
 prop-set lcsim.maxEvents 10000
@@ -20,4 +21,4 @@ prop-set et.chunk 1
 prop-set et.prescale 1
 prop-set et.connectionAttempts 10
 
-create -s 4
+create -s 1
