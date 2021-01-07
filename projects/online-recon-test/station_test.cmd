@@ -15,4 +15,4 @@ set lcsim.run 7798
 set lcsim.conditions jdbc:sqlite:/work/slac/data/conditions/hps_conditions_2020_08_17.db
 
 # Create stations and start them
-create -s 4
+create -s 2
