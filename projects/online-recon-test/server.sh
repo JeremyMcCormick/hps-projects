@@ -1,5 +1,5 @@
 rm logs/server.log &> /dev/null
-bin/hps-recon-server -w $PWD/scratch &
+bin/hps-recon-server --host localhost -w $PWD/scratch &
 echo $!
 until [ -f logs/server.log ]
 do
