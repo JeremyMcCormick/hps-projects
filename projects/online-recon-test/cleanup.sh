@@ -1,1 +1,1 @@
-rm -rf scratch bin repo
+rm -rf scratch/HPS_RECON_* bin repo
